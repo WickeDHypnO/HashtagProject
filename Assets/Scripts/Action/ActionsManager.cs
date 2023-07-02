@@ -18,11 +18,18 @@ public class ActionsManager : MonoBehaviour
         
     }
 
+    public void ExecutePlayerAction(Action action, Character user, Character target = null)
+    {
+        ExecuteAction(action, user, target);
+        _battleState.OnPlayerActionFinished();
+    }
+
     public void ExecuteAction(Action action, Character user, Character target = null)
     {
        var targets = getTargets(action.target, user, target);
        foreach(var character in targets)
         {
+            Debug.Log($"{user.characterName} used {action.name} on {character.name}");
             handleActionType(action, character);
         }
     }

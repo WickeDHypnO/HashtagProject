@@ -33,7 +33,7 @@ public class InventoryManager: MonoBehaviour
     public bool UseItem(Item item)
     {
         //TODO: Hardcoded use action[0], if multiple choices => base action on clicked UI element + hardcoded target to first enemy
-        _actionsManager.ExecuteAction(item.actions[0], _battleState.player, _battleState.enemies[0]);
+        _actionsManager.ExecutePlayerAction(item.actions[0], _battleState.player, _battleState.enemies[0]);
         if (item.Use())
         {
             _items.Remove(item);

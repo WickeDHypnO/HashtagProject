@@ -28,4 +28,9 @@ public class Character : ScriptableObject
     {
         _currentHp = maxHp;
     }
+
+    public Action GetRandomAction()
+    {
+        return actions[Random.Range(0, actions.Count)];
+    }
 } 
