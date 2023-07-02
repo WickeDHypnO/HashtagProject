@@ -1,75 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-public class ItemBuilder
+public class ItemBuilder: MonoBehaviour
 {
-    public List<Item> availableItems = new List<Item>()
-    {
-        new Item()
-        {
-            id = ItemId.SmallSword,
-            name = "Small Sword",
-            size = 2,
-            maxCharges = 5,
-            itemType = ItemType.Weapon,
-            actions = new List<Action>
-            {
-                new Action()
-                {
-                    name = "Attack",
-                    target = ActionTarget.Enemy,
-                    type = ActionType.Damage,
-                    value = 5
-                }
-            }
-        },
-        new Item()
-        {
-            id = ItemId.SmallPotion,
-            name = "Small Potion",
-            size = 1,
-            maxCharges = 1,
-            itemType = ItemType.Consumable,
-            actions = new List<Action>
-            {
-                new Action()
-                {
-                    name = "Heal",
-                    target = ActionTarget.User,
-                    type = ActionType.Heal,
-                    value = 10
-                }
-            }
-        },
-        new Item()
-        {
-            id = ItemId.BigSword,
-            name = "Big Sword",
-            size = 4,
-            maxCharges = 3,
-            itemType = ItemType.Weapon,
-            actions = new List<Action>
-            {
-                new Action()
-                {
-                    name = "Attack All",
-                    target = ActionTarget.AllEnemies,
-                    type = ActionType.Damage,
-                    value = 7
-                },
-                new Action()
-                {
-                    name = "Attack",
-                    target = ActionTarget.Enemy,
-                    type = ActionType.Damage,
-                    value = 20
-                }
-            }
-        }
-    };
+    [SerializeField]
+    List<Item> availableItems;
 
     public Item GenerateItem(ItemId itemId)
     {
         return availableItems.Single(item => item.id == itemId);
+    }
+
+    public Item GenerateRandomItem()
+    {
+        var rnd = new System.Random();
+        return Instantiate(availableItems[rnd.Next(availableItems.Count)]);
     }
 }

@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Item
+[CreateAssetMenu(fileName = "Item", menuName = "ScriptableObject/Item")]
+public class Item: ScriptableObject
 {
     public ItemId id;
-    public string name;
+    public string itemName;
     public int size;
     public int maxCharges;
-    public int usedCharges;
     public ItemType itemType;
     public List<Action> actions;
+    public Sprite itemGraphic;
 
     public bool Use()
     {
-        ++usedCharges;
-        return maxCharges != usedCharges;
+        maxCharges--;
+        return maxCharges == 0;
     }
 }

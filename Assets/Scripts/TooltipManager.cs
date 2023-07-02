@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestCreation : MonoBehaviour
+public class TooltipManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,10 @@ public class TestCreation : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnMouseOver()
+    {
+        Debug.Log("entered");
     }
 }

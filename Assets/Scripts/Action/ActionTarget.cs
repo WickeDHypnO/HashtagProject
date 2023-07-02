@@ -1,7 +1,7 @@
 public enum ActionTarget
 {
-    User,
-    Enemy,
-    AllEnemies,
+    Self,
+    Target,
+    AllTargets,
     Everyone
 }

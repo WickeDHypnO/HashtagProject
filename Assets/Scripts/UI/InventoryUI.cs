@@ -1,14 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    private InventoryManager inventoryManager;
-    // Start is called before the first frame update
+    [SerializeField]
+    InventoryManager _inventoryManager;
+    [SerializeField]
+    Vector2 _firstItemPosition;
+    [SerializeField]
+    InventoryTile _tilePlaceholder;
 
-    InventoryUI()
+    public bool AddItem(Item item)
     {
-        inventoryManager = new InventoryManager();
+        if(_inventoryManager.AddItem(item))
+        {
+            var position = new Vector2(_firstItemPosition.x + (40 * _inventoryManager.GetItemList().Count), _firstItemPosition.y);
+            var tile = Instantiate(_tilePlaceholder, position, Quaternion.identity, transform);
+            tile.FillTile(item, _inventoryManager);
+            return true;
+        }
+        return false;
     }
 }
