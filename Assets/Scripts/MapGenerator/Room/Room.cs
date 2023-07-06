@@ -23,3 +23,10 @@ public class Room
         return true;
     }
 }
+
+public enum RoomType
+{
+    Nothing, //We should not be using this, just here to spot broken or unset rooms
+    Fight,
+    Chest
+}
