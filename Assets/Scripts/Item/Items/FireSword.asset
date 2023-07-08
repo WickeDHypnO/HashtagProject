@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: FireSword
   m_EditorClassIdentifier: 
   id: 0
-  itemName: 
-  size: 0
-  maxCharges: 0
+  itemName: Fire sword
+  size: 1
+  maxCharges: 5
   itemType: 0
-  elementType: 0
-  actions: []
-  itemGraphic: {fileID: 0}
+  isEquipped: 0
+  elementType: 2
+  actions:
+  - {fileID: 11400000, guid: c4d5a9fac5c872e46a0680e9697d9cab, type: 2}
+  itemGraphic: {fileID: -978597309, guid: a60498d8f8a344143afaf22627d9d179, type: 3}

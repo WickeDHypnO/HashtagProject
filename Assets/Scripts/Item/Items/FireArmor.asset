@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: FireArmor
   m_EditorClassIdentifier: 
   id: 0
-  itemName: 
-  size: 0
-  maxCharges: 0
-  itemType: 0
+  itemName: Fire Armor
+  size: 2
+  maxCharges: 10
+  itemType: 3
   isEquipped: 0
-  elementType: 0
+  elementType: 2
   actions: []
-  itemGraphic: {fileID: 0}
+  itemGraphic: {fileID: -2065337049, guid: a60498d8f8a344143afaf22627d9d179, type: 3}

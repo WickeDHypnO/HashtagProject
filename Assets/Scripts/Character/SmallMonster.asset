@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   characterName: SmallMonster
-  maxHp: 10
+  maxHp: 20
+  armor: 0
   actionsPerTurn: 1
   speed: 2
   isPlayer: 0
+  element: 3
   actions:
   - {fileID: 11400000, guid: c5d888b9029844d4ea3a8799831b671d, type: 2}
