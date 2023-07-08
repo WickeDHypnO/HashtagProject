@@ -2,5 +2,7 @@
 {
     Weapon,
     Passive,
-    Consumable
+    Consumable,
+    Armor,
+    Shield
 }

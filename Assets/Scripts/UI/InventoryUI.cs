@@ -12,6 +12,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     InventoryTile _tilePlaceholder;
 
+
     public bool AddItem(Item item)
     {
         if(_inventoryManager.AddItem(item))
@@ -23,4 +24,5 @@ public class InventoryUI : MonoBehaviour
         }
         return false;
     }
+
 }

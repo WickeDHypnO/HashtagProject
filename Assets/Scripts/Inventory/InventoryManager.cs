@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Codice.Client.BaseCommands.Merge.Xml;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Search;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class InventoryManager: MonoBehaviour
 {
@@ -33,7 +35,7 @@ public class InventoryManager: MonoBehaviour
     public bool UseItem(Item item)
     {
         //TODO: Hardcoded use action[0], if multiple choices => base action on clicked UI element + hardcoded target to first enemy
-        _actionsManager.ExecutePlayerAction(item.actions[0], _battleState.player, _battleState.enemies[0]);
+        _actionsManager.ExecutePlayerAction(item.actions[0], _battleState.player, _battleState.enemies[0], item.elementType);
         if (item.Use())
         {
             _items.Remove(item);
@@ -42,7 +44,16 @@ public class InventoryManager: MonoBehaviour
         return false;
 
     }
-    
+
+    public void EquipItem(Item item)
+    {
+        item.isEquipped = true;
+        if (item.itemType == ItemType.Armor)
+        {
+            _battleState.player.element = item.elementType;
+        }
+    }
+
     public List<Item> GetItemList()
     {
         return _items;

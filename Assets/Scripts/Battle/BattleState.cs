@@ -29,7 +29,7 @@ public class BattleState : MonoBehaviour
     {
         foreach(Character enemy in enemies) 
         {
-            _actionsManager.ExecuteAction(enemy.GetRandomAction(), enemy);
+            _actionsManager.ExecuteAction(enemy.GetRandomAction(), enemy, null, enemy.element);
         }
     }
 }

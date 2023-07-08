@@ -11,6 +11,8 @@ public class Item: ScriptableObject
     public int size;
     public int maxCharges;
     public ItemType itemType;
+    public bool isEquipped;
+    public ElementType elementType;
     public List<Action> actions;
     public Sprite itemGraphic;
 

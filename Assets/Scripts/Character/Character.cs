@@ -20,9 +20,11 @@ public class Character : ScriptableObject
         }
     }
     public int maxHp;
+    public int armor;
     public int actionsPerTurn = 1;
     public int speed;
     public bool isPlayer;
+    public ElementType element;
     public List<Action> actions;
     void Awake()
     {

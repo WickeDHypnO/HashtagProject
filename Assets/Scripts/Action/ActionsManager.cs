@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ActionsManager : MonoBehaviour
@@ -18,23 +19,23 @@ public class ActionsManager : MonoBehaviour
         
     }
 
-    public void ExecutePlayerAction(Action action, Character user, Character target = null)
+    public void ExecutePlayerAction(Action action, Character user, Character target = null, ElementType itemElement = ElementType.None)
     {
-        ExecuteAction(action, user, target);
+        ExecuteAction(action, user, target, itemElement);
         _battleState.OnPlayerActionFinished();
     }
 
-    public void ExecuteAction(Action action, Character user, Character target = null)
+    public void ExecuteAction(Action action, Character user, Character target = null, ElementType usedElement = ElementType.None)
     {
        var targets = getTargets(action.target, user, target);
        foreach(var character in targets)
         {
             Debug.Log($"{user.characterName} used {action.name} on {character.name}");
-            handleActionType(action, character);
+            handleActionType(action, character, usedElement);
         }
     }
 
-    private void handleActionType(Action action, Character target)
+    private void handleActionType(Action action, Character target, ElementType usedElement)
     {
         switch (action.type)
         {
@@ -42,11 +43,29 @@ public class ActionsManager : MonoBehaviour
                 target.currentHp += action.value;
                 break;
             case ActionType.Damage:
-                target.currentHp -= action.value;
+                var damageAfterResistances = Mathf.RoundToInt(checkResistances(target.element, usedElement) * action.value);
+                target.currentHp -= damageAfterResistances;
                 break;
         }
     }
 
+    private float checkResistances(ElementType targetElement, ElementType usedElement)
+    {
+        var usedElementStats = ElementalConsts.ElementalEmpower.FirstOrDefault(x => x.Type == usedElement);
+        if(usedElementStats == null)
+        {
+            return 1;
+        }
+        if(usedElementStats.Weakness == targetElement) 
+        {
+            return 1.5f;
+        }
+        if(usedElementStats.Empowers == targetElement)
+        {
+            return 0.5f;
+        }
+        return 1;
+    }
     private List<Character> getTargets(ActionTarget actionTarget, Character user, Character target = null)
     {
         var targets = new List<Character>();
