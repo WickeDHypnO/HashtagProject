@@ -21,8 +21,6 @@ public class InventoryTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         _startingPosition = transform.position;
         GetComponent<Image>().raycastTarget = false;
-        Debug.Log("start");
-
     }
 
     public void OnDrag(PointerEventData eventData)
