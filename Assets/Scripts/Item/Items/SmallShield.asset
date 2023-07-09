@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: SmallShield
   m_EditorClassIdentifier: 
   id: 0
-  itemName: 
-  size: 0
-  maxCharges: 0
+  itemName: Small Shield
+  size: 2
+  maxCharges: 10
   currentCharges: 0
-  itemType: 0
+  itemType: 4
   isEquipped: 0
   elementType: 0
   actions: []
-  itemGraphic: {fileID: 0}
+  itemGraphic: {fileID: 1581643135, guid: a60498d8f8a344143afaf22627d9d179, type: 3}
