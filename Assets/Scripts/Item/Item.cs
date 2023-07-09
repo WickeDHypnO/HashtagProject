@@ -10,15 +10,29 @@ public class Item: ScriptableObject
     public string itemName;
     public int size;
     public int maxCharges;
+    public int currentCharges;
     public ItemType itemType;
     public bool isEquipped;
     public ElementType elementType;
     public List<Action> actions;
     public Sprite itemGraphic;
 
+    private void Awake()
+    {
+        currentCharges = maxCharges;  
+    }
+
     public bool Use()
     {
-        maxCharges--;
-        return maxCharges == 0;
+        currentCharges--;
+        return currentCharges == 0;
     }
+
+    public bool UseManyCharges(int amount)
+    {
+        currentCharges -= amount;
+        return currentCharges <= 0;
+    }
+
+    
 }

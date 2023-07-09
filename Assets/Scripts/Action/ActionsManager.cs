@@ -7,6 +7,9 @@ public class ActionsManager : MonoBehaviour
 {
     [SerializeField]
     BattleState _battleState;
+    [SerializeField]
+    InventoryManager _inventoryManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +47,7 @@ public class ActionsManager : MonoBehaviour
                 break;
             case ActionType.Damage:
                 var damageAfterResistances = Mathf.RoundToInt(checkResistances(target.element, usedElement) * action.value);
-                target.currentHp -= damageAfterResistances;
+                dealDamage(damageAfterResistances, target);
                 break;
         }
     }
@@ -65,6 +68,27 @@ public class ActionsManager : MonoBehaviour
             return 0.5f;
         }
         return 1;
+    }
+
+    private void dealDamage(int damageAfterResistances, Character target)
+    {
+        if(target.armor > 0)
+        {
+            target.armor -= damageAfterResistances;
+            if(target.isPlayer)
+            {
+                _inventoryManager.ReduceCharges(ItemType.Shield, damageAfterResistances);
+            }
+            if (target.armor < 0)
+            {
+                target.currentHp += target.armor;
+                target.armor = 0;
+            }
+        }
+        else
+        {
+            target.currentHp -= damageAfterResistances;
+        }
     }
     private List<Character> getTargets(ActionTarget actionTarget, Character user, Character target = null)
     {

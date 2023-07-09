@@ -14,7 +14,7 @@ public class InventoryManagerTests
         ItemBuilder builder = new ItemBuilder();
 
         var item = builder.GenerateItem(ItemId.SmallSword);
-        var wasAddedSuccesfully = manager.AddItem(item);
+        var wasAddedSuccesfully = manager.CanAddItem(item);
 
         Assert.True(wasAddedSuccesfully);
         Assert.Contains(item, manager.GetItemList());
@@ -31,7 +31,7 @@ public class InventoryManagerTests
         ItemBuilder builder = new ItemBuilder();
 
         var item = builder.GenerateItem(ItemId.BigSword);
-        var wasAddedSuccesfully = manager.AddItem(item);
+        var wasAddedSuccesfully = manager.CanAddItem(item);
 
         Assert.False(wasAddedSuccesfully);
         Assert.IsEmpty(manager.GetItemList());
