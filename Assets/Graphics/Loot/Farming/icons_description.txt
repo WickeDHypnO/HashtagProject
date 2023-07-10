@@ -1,0 +1,102 @@
+Farming Set:
+
+001 – 	Hand Saw		A small saw, operated by one hand.
+002 – 	Scraper			A tool for scraping off paint or other adherent matter.
+003 – 	Pitchfork		A large, long handled fork with sharp, widely spaced prongs.
+004 – 	Scythe			A long curved single edged blade, used for mowing or reaping.
+005 – 	Sickle			A crescent shaped blade for cutting grain or tall grass.
+006 – 	Wooden Bucket		A bucket made out of wood.
+007 – 	Rolling Pin		A smooth cylinder, used for rolling out dough.
+008 – 	Frying Pan		A shallow long-handled pan used for frying food.
+009 – 	Cooking Pot		A pot for cooking meals.
+010 – 	Cutlery			Knife & fork.
+011 – 	Universal Tool Box	This box contains dozen of useful tools.
+012 – 	Clothes Hanger		To effectively store your clothes.
+013 – 	Bar-Bell		Train our strength.
+014 – 	Golden Bell		A little, high pitched bell.
+015 – 	Pocketwatch		A precious, golden pocketwatch with a long chain.
+016 – 	Magnifying Lense	A detective‘s tool of choice.
+017 – 	Glasses			For better eyesight.
+018 – 	Letter			Open it to read the message.
+019 – 	Cleaver			A butcher‘s favourite tool.
+020 – 	Hamster			A cute little hamster.
+021 – 	Wooden Plank		Wooden planks for building various structures.
+022 – 	Brick			Clay bricks for building various structures.
+023 – 	Animal Brush		A brush, made for animal fur.
+024 – 	Brush			For paintwork.
+025 – 	Color Palette		With this you can paint beautiful artworks.
+026 – 	Sheet of Paper		An empty sheet of paper.
+027 – 	Framed Painting		Master artwork.
+028 – 	Cage			A cage for small animals.
+029 – 	Chicken			A domesticated bird, lays egg.
+030 – 	Egg			A chicken‘s egg..
+031 – 	Sponge			A gauze pad used to absorb fluids.
+032 – 	Fertility Fetish	A little females stone figure.
+033 – 	Cross			A cross, helps against vampires & werewolves.
+034 – 	Cooked Meat		Delicious cooked meat.
+035 – 	Ham			The thigh of the hind leg of a hog.
+036 – 	Salami			Highly spiced & salted sausages, made from beef (mixed with pork).
+037 – 	Sausages		Sausages made from pork.
+038 – 	Chicken Leg		A leg from a chicken.
+039 – 	Cooked Chicken		A full meal.
+040 – 	Salt			Used for food seasoning or as preservative.
+041 – 	Set of Cards		Playing cards.
+042 – 	Horseshoe		A flat U-shaped metal plate fitted and nailed to a horse‘s hoof.
+043 – 	Four-Leaf Clover	An omen of good luck.
+044 – 	Yarn			A continuous strand of twisted threads.
+045 – 	Grain			Cereal grass.
+046 – 	Millstone		A heavy millstone to grind grain into flour.
+047 – 	Flour			A fine, powdery foodstuff, used chiefly in baking.
+048 – 	Pretzel			A soft glazed biscuit, that is salted.
+049 – 	Loaf of Bread		A delicious loaf of bread.
+050 – 	Pie			A layer-cake.
+051 – 	Big Seeds		Big-sized seeds.
+052 – 	Medium Seeds		Medium-sized seeds.
+053 – 	Small Seeds		Small-sized seeds.
+054 – 	Wool			Hairy, drowny material from animals or plants.
+055 – 	Fabric			A sheet of woven fabric.
+056 – 	Honeybee		A type of bee that produces honey.
+057 – 	Honeycombs		A structure of hexagonal, thin walled cells constrcted from beeswax.
+058 – 	Empty Honey Glass	An empty glass of honey.
+059 – 	Honey			A sweet yellowy fluid, produced by bees.
+060 – 	Candle			A candle made out of wax.
+061 – 	Corn			Fruit of a tall annual creal grass.
+062 – 	Onion			A bulbous plant, cultivated as vegetable.
+063 – 	Garlic			A plant which breaks up into several cloves with a strong odor.
+064 – 	Cabbage			A vegetable of the mustard family, with big green leaves.
+065 – 	Tomato			A widely cultivated red fruit of the nightshade family.
+066 – 	Carrot			A bieennial Eurasian plant of the parsley family.
+067 – 	Turnip			A widely cultivated plant with an eadible root.
+068 – 	Eggplant		A plant native to India, cultivated for it‘s edible ovoid purple fruit.
+069 – 	Pear			A tree fruit with a gritty, juicy flesh.
+070 – 	Pumpkin			A large orange round fruit, with a thick orange rind and pulpy flesh.
+071 – 	Rose			A showy, fragrant flower.
+072 – 	Chili			A plant, used especially for flavouring in cooking.
+073 – 	Strawberry		An edible, red, berry, from a low-growing Fragaria plant.
+074 – 	Cherry			A small, fleshy roundish fruit from a tree.
+075 – 	Grape			Edible berries, widely used in winemaking.
+076 – 	Flute			A high-pitched woodwind instrument.
+077 – 	Ocarina			A small terra-cotta instrument with finger-holes.
+078 – 	Bongo			A drum played by beating with the hands.
+079 – 	Violin			A stringed instrument, played with a bow.
+080 – 	Flugelhorn		A metal bugle with valves.
+081 – 	Hops			A twining vine having lobed leaves, used in brewing beer.
+082 – 	Barley			A grass used for malt production.
+083 – 	Empty Beer Mug		An empty mug.
+084 – 	Beer			Delicious, alcoholic drink.
+085 – 	Wine			A beverage, made from the fermented juice of grapes.
+086 – 	Barrel			A wooden barrel, used to store liquids.
+087 – 	Sack			A big sack, filled with some powdery stuff.
+088 – 	Bag			A medium-sized bag.
+089 – 	Bonbon			A candy.
+090 – 	Lollipop		A confection made with a hard candy on a stick.
+091 – 	Tobacco Plant		Aromatic shrubs, used to make cigrs or cigarettes.
+092 – 	Cigar			A compact roll of tobacco leaves prepared for smoking.
+093 – 	Hemp			An annual strong-smelling Asian plant.
+094 – 	Rope			Tough fibers made from yarn or hemp.
+095 – 	Hay			Cut and dried grass, animal fodder.
+096 – 	Empty Milk Bottle	An empty bottle.
+097 – 	Milk			Delicious cow-milk.
+098 – 	Loaf of Cheese		A solid food, prepared from the pressed curd of milk.
+099 – 	Mouse			An animal with a pointed nose, small rounded ears and a long tail.
+100 – 	Mousetrap		A trap for catching mice.
