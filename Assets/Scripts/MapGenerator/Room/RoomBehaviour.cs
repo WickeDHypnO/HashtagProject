@@ -5,7 +5,7 @@ public class RoomBehaviour : MonoBehaviour
 {
     public Room roomData;
     public RoomType roomType;
-    public Action OnRoomGenerated = delegate { };
+    public System.Action OnRoomGenerated = delegate { };
 
     [ContextMenu("Generate new room")]
     public void GenerateNewRoom(RoomType type)

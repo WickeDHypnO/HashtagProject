@@ -1,18 +1,32 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class MapBuilder : MonoBehaviour
 {
     public int maxX = 10;
     public int maxY = 5;
     public int roomsNumber = 10;
     public int[][] map = new int[99][];
-    public List<Material> materials = new List<Material>();
+    public List<GameObject> mapItems = new List<GameObject>();
+    public GameObject mapTile;
     public Transform mapParent;
     private int startY, endX, endY;
-    
+    public System.Action<int[][]> OnMapGenerated = delegate { };
+
+    private void Start()
+    {
+        StartCoroutine(GenerateDelayed());
+    }
+
+    IEnumerator GenerateDelayed()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GenerateMap();
+    }
+
     private void RandomWalkGeneration(int startX, int startY, bool ignoreFilled)
     {
         int currentX = startX;
@@ -203,24 +217,11 @@ public class MapGenerator : MonoBehaviour
     [ContextMenu("Generate")]
     public void GenerateMap()
     {
-        //var remainingRooms = roomsNumber;
         map = new int[maxX][];
         for (int i = 0; i < maxX; i++)
         {
             map[i] = new int[maxY];
         }
-        //while (remainingRooms > 0)
-        //{
-        //    var randX = UnityEngine.Random.Range(0, maxX);
-        //    var randY = UnityEngine.Random.Range(0, maxY);
-        //    while (map[randX][randY] != 0)
-        //    {
-        //        randX = UnityEngine.Random.Range(0, maxX);
-        //        randY = UnityEngine.Random.Range(0, maxY);
-        //    }
-        //    map[randX][randY] = 1;
-        //    remainingRooms--;
-        //}
 
         startY = UnityEngine.Random.Range(0, maxY);
         RandomWalkGeneration(0, startY, true);
@@ -265,29 +266,46 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        for (int x = 0; x < maxX; x++)
+        //for (int x = 0; x < maxX; x++)
+        //{
+        //    for (int y = 0; y < maxY; y++)
+        //    {
+        //        if (map[x][y] != 0)
+        //        {
+        //            var go = Instantiate(mapTile);
+        //            Instantiate(mapItems[map[x][y]]);
+        //            //go.GetComponent<MeshRenderer>().material = materials[map[x][y]];
+        //            go.transform.SetParent(mapParent);
+        //            go.transform.localPosition = new Vector3((float)x, (float)y);
+        //        }
+        //    }
+        //}
+
+        try
         {
-            for (int y = 0; y < maxY; y++)
-            {
-                if (map[x][y] != 0)
-                {
-                    var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    go.GetComponent<MeshRenderer>().material = materials[map[x][y]];
-                    go.transform.SetParent(mapParent);
-                    go.transform.localPosition = new Vector3((float)x, (float)y);
-                }
-            }
+            FindPathFromStartToEnd(0, startY, endX, endY);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("Map with wrong path generated, generating new one...");
+            GenerateMap();
+            return;
         }
 
-        FindPathFromStartToEnd(0, startY, endX, endY);
+        OnMapGenerated(map);       
     }
 
-    private void FindPathFromStartToEnd(int fromX, int fromY, int toX, int toY)
+    public List<Tuple<int, int>> FindPathFromStartToEnd(int fromX, int fromY, int toX, int toY)
     {
         matrixNode endNode = AStar(map, fromX, fromY, toX, toY);
 
         //looping through the Parent nodes until we get to the start node
         Stack<matrixNode> path = new Stack<matrixNode>();
+
+        Debug.Log("FromX " + fromX);
+        Debug.Log("FromY " + fromY);
+        Debug.Log("ToX " + toX);
+        Debug.Log("ToY " + toY);
 
         while (endNode.x != fromX || endNode.y != fromY)
         {
@@ -299,11 +317,24 @@ public class MapGenerator : MonoBehaviour
         Debug.Log("The shortest path from  " +
                           "(" + fromX + "," + fromY + ")  to " +
                           "(" + toX + "," + toY + ")  is:  \n");
-
+        var pathList = new List<Tuple<int, int>>();
         while (path.Count > 0)
         {
             matrixNode node = path.Pop();
             Debug.Log(("(" + node.x + "," + node.y + ")"));
+            pathList.Add(new Tuple<int, int>(node.x, node.y));
         }
+
+        return pathList;
+    }
+
+    public int GetTileType(int x, int y)
+    {
+        return map[x][y];
+    }
+
+    public void SetTileCleared(int x, int y)
+    {
+        map[x][y] = 1;
     }
 }
