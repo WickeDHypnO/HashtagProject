@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,13 +8,13 @@ using UnityEngine.UI;
 public class InventoryTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     public Item item;
+    public ItemType _slotType = ItemType.None;
     protected InventoryManager _inventoryManager;
     private Vector2 _startingPosition;
     public void FillTile(Item item, InventoryManager inventoryManager)
     {
         this.item = Instantiate(item);
         _inventoryManager = inventoryManager;
-        _inventoryManager.AddItem(this.item);
         GetComponent<Image>().sprite = item.itemGraphic;
     }
 
@@ -32,29 +33,23 @@ public class InventoryTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         GetComponent<Image>().raycastTarget = true;
         var targetInventoryTile = eventData.pointerCurrentRaycast.gameObject.GetComponent<InventoryTile>();
-        if (targetInventoryTile != null)
+        if (targetInventoryTile != null && targetInventoryTile._slotType != ItemType.None)
         {
-            var equippedItem = targetInventoryTile.GetComponent<EquipmentInventoryTile>();
-            var isItemBeingEquiped = equippedItem && equippedItem.slotType == item.itemType;
-
-            if (equippedItem == null || isItemBeingEquiped)
+            var isItemBeingEquiped = targetInventoryTile._slotType == item.itemType;
+            if (isItemBeingEquiped)
+            {
+                _inventoryManager.TakeOffItem(targetInventoryTile.item);
+                _inventoryManager.EquipItem(item);
+                _slotType = targetInventoryTile._slotType;
+            }
+            if(isItemBeingEquiped || targetInventoryTile._slotType == ItemType.Backpack)
             {
                 transform.position = targetInventoryTile.transform.position;
                 targetInventoryTile.transform.position = _startingPosition;
             }
-            if (isItemBeingEquiped)
-            {
-                _inventoryManager.TakeOffItem(equippedItem.item);
-                _inventoryManager.EquipItem(item);
-            }
-            else
-            {
-                Debug.Log($"{item} cannot be equiped in this slot");
-            }
+
             return;
         }
-
-        Debug.Log("koniec");
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -64,7 +59,19 @@ public class InventoryTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             return;
         }
 
-        if(_inventoryManager.UseItem(item))
+        if (_slotType == ItemType.None)
+        {
+            if (_inventoryManager.CanAddItem(item))
+            {
+                _inventoryManager.AddItem(this);
+                _slotType = ItemType.Backpack;
+            }
+            else
+            {
+                Debug.LogWarning(item.name + " not added");
+            }
+        }
+        else if(_inventoryManager.UseItem(item))
         {
             DestroyItem();
         };

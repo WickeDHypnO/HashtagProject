@@ -23,6 +23,8 @@ public class MapUI : MonoBehaviour
     private Tuple<int, int> selectedPosition = new Tuple<int, int>(0, 0);
     [SerializeField]
     private GameObject playerPrefab;
+    [SerializeField]
+    private ChestUI _chestUI;
     private GameObject playerObject;
     private Queue<Tuple<int, int>> queuedMovements = new Queue<Tuple<int, int>>();
     private bool moving = false;
@@ -114,6 +116,7 @@ public class MapUI : MonoBehaviour
                 var clearedChest = Instantiate(clearedPrefab);
                 clearedChest.transform.SetParent(transform);
                 clearedChest.transform.localPosition = new Vector3((float)tile.Item1 * tileSpacing, (float)tile.Item2 * tileSpacing);
+                _chestUI.GenerateChest();
                 mapBuilder.SetTileCleared(tile.Item1, tile.Item2);
                 moving = false;
                 //Should break the movement here probably

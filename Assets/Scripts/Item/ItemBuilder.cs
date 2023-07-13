@@ -16,6 +16,6 @@ public class ItemBuilder: MonoBehaviour
     public Item GenerateRandomItem()
     {
         var rnd = new System.Random();
-        return Instantiate(availableItems[rnd.Next(availableItems.Count)]);
+        return availableItems[rnd.Next(availableItems.Count)];
     }
 }

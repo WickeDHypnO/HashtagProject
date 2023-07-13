@@ -16,8 +16,10 @@ MonoBehaviour:
   itemName: Big Sword
   size: 4
   maxCharges: 3
-  usedCharges: 0
-  itemType: 0
+  currentCharges: 3
+  itemType: 2
+  isEquipped: 0
+  elementType: 0
   actions:
   - {fileID: 11400000, guid: 9017a00d91d99e54f93fc25600609db4, type: 2}
   itemGraphic: {fileID: -242995467, guid: a60498d8f8a344143afaf22627d9d179, type: 3}

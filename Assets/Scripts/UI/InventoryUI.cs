@@ -13,17 +13,11 @@ public class InventoryUI : MonoBehaviour
     InventoryTile _tilePlaceholder;
     public List<InventoryTile> inventoryTiles = new List<InventoryTile>();
 
-    public bool AddItem(Item item)
+    public void AddItem(InventoryTile inventoryTile)
     {
-        if(_inventoryManager.CanAddItem(item))
-        {
-            var position = new Vector2(_firstItemPosition.x + (40 * _inventoryManager.GetItemList().Count), _firstItemPosition.y);
-            var tile = Instantiate(_tilePlaceholder, position, Quaternion.identity, transform);
-            tile.FillTile(item, _inventoryManager);
-            inventoryTiles.Add(tile);
-            return true;
-        }
-        return false;
+        var position = new Vector2(_firstItemPosition.x + (40 * _inventoryManager.GetItemList().Count), _firstItemPosition.y);
+        inventoryTile.transform.position = position;
+        inventoryTiles.Add(inventoryTile);
     }
 
 }

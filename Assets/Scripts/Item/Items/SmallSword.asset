@@ -16,8 +16,10 @@ MonoBehaviour:
   itemName: Small Sword
   size: 2
   maxCharges: 5
-  usedCharges: 0
-  itemType: 0
+  currentCharges: 5
+  itemType: 2
+  isEquipped: 0
+  elementType: 0
   actions:
   - {fileID: 11400000, guid: c4d5a9fac5c872e46a0680e9697d9cab, type: 2}
   itemGraphic: {fileID: 1253219569, guid: a60498d8f8a344143afaf22627d9d179, type: 3}

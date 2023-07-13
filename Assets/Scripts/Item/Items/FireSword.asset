@@ -16,7 +16,8 @@ MonoBehaviour:
   itemName: Fire sword
   size: 1
   maxCharges: 5
-  itemType: 0
+  currentCharges: 5
+  itemType: 2
   isEquipped: 0
   elementType: 2
   actions:

@@ -16,8 +16,8 @@ MonoBehaviour:
   itemName: Small Shield
   size: 2
   maxCharges: 10
-  currentCharges: 0
-  itemType: 4
+  currentCharges: 10
+  itemType: 6
   isEquipped: 0
   elementType: 0
   actions: []

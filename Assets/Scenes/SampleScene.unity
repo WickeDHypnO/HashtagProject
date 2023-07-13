@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 328563461}
   - component: {fileID: 328563460}
   - component: {fileID: 328563462}
+  - component: {fileID: 328563463}
   m_Layer: 0
   m_Name: ArmorTile
   m_TagString: Untagged
@@ -411,7 +412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 737, y: 254.07709}
+  m_AnchoredPosition: {x: 576.0771, y: 172.12299}
   m_SizeDelta: {x: 65.8458, y: 65.8458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328563460
@@ -465,7 +466,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
+  _slotType: 0
+  _inventoryManager: {fileID: 0}
+  _startingPosition: {x: 0, y: 0}
   slotType: 3
+--- !u!114 &328563463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328563458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a68250b8df0d3445b924a340005205a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  _slotType: 5
 --- !u!1 &339604509
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 567.9229, y: 273.9541}
+  m_AnchoredPosition: {x: 407, y: 192}
   m_SizeDelta: {x: 200, y: 60.2462}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &472102483
@@ -776,7 +794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 870, y: -60}
+  m_AnchoredPosition: {x: 384, y: -187}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &481396161
@@ -807,6 +825,7 @@ MonoBehaviour:
   pathDot: {fileID: 3115269504482044576, guid: e1e06a222e6769c42a2da89a0bfa0397, type: 3}
   clearedPrefab: {fileID: 1508144340118310358, guid: 566989c585a6be240bd37bf0a52c419c, type: 3}
   playerPrefab: {fileID: 1728050247408045844, guid: 354863344f179fc4fa9b375b160eaaf7, type: 3}
+  _chestUI: {fileID: 1991780309}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 823.9229, y: 289.0771}
+  m_AnchoredPosition: {x: 663, y: 207.12299}
   m_SizeDelta: {x: 200, y: 60.2462}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &557533560
@@ -1389,7 +1408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryManager: {fileID: 999462106}
-  _firstItemPosition: {x: 600, y: 150}
+  _firstItemPosition: {x: 300, y: 100}
   _tilePlaceholder: {fileID: 5291479276999714393, guid: bd2fa4a619964a444a2f226df5d289fc, type: 3}
   inventoryTiles: []
 --- !u!4 &999462105
@@ -1437,6 +1456,7 @@ GameObject:
   - component: {fileID: 1065927501}
   - component: {fileID: 1065927500}
   - component: {fileID: 1065927502}
+  - component: {fileID: 1065927503}
   m_Layer: 0
   m_Name: ShieldTile
   m_TagString: Untagged
@@ -1461,7 +1481,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 821, y: 254.07709}
+  m_AnchoredPosition: {x: 660.0771, y: 172.12299}
   m_SizeDelta: {x: 65.8458, y: 65.8458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1065927500
@@ -1515,7 +1535,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
+  _slotType: 0
+  _inventoryManager: {fileID: 0}
+  _startingPosition: {x: 0, y: 0}
   slotType: 4
+--- !u!114 &1065927503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065927498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a68250b8df0d3445b924a340005205a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  _slotType: 6
 --- !u!1 &1180375512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,7 +1728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 742.9229, y: 289.0771}
+  m_AnchoredPosition: {x: 582, y: 207.12299}
   m_SizeDelta: {x: 200, y: 60.2462}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1481661578
@@ -2130,9 +2167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd45bf63db29d2943bccdf47a5d49e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inventoryManager: {fileID: 999462106}
   _itemBuilder: {fileID: 300183630}
   _items: []
-  itemPrefab: {fileID: 6023397055286153941, guid: 9baf775c756a6194c90a6d419a9a9642, type: 3}
+  itemPrefab: {fileID: 5291479276999714393, guid: bd2fa4a619964a444a2f226df5d289fc, type: 3}
 --- !u!1 &2069797887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,6 +2183,7 @@ GameObject:
   - component: {fileID: 2069797890}
   - component: {fileID: 2069797889}
   - component: {fileID: 2069797891}
+  - component: {fileID: 2069797892}
   m_Layer: 0
   m_Name: WeaponTile
   m_TagString: Untagged
@@ -2169,7 +2208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 658.9229, y: 254.07709}
+  m_AnchoredPosition: {x: 498, y: 172.12299}
   m_SizeDelta: {x: 65.8458, y: 65.8458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2069797889
@@ -2223,7 +2262,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
+  _slotType: 0
+  _inventoryManager: {fileID: 0}
+  _startingPosition: {x: 0, y: 0}
   slotType: 0
+--- !u!114 &2069797892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069797887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a68250b8df0d3445b924a340005205a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  _slotType: 2
 --- !u!1 &2107997016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2259,7 +2315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 896.9229, y: 289.0771}
+  m_AnchoredPosition: {x: 736, y: 207.12299}
   m_SizeDelta: {x: 200, y: 60.2462}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2107997018

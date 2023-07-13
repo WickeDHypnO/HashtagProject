@@ -16,7 +16,8 @@ MonoBehaviour:
   itemName: Fire Armor
   size: 2
   maxCharges: 10
-  itemType: 3
+  currentCharges: 10
+  itemType: 5
   isEquipped: 0
   elementType: 2
   actions: []

@@ -16,8 +16,10 @@ MonoBehaviour:
   itemName: Small Potion
   size: 1
   maxCharges: 1
-  usedCharges: 0
-  itemType: 2
+  currentCharges: 1
+  itemType: 4
+  isEquipped: 0
+  elementType: 0
   actions:
   - {fileID: 11400000, guid: 7b2e7935b2a642345991bcc23dcac890, type: 2}
   itemGraphic: {fileID: 395511657, guid: a60498d8f8a344143afaf22627d9d179, type: 3}

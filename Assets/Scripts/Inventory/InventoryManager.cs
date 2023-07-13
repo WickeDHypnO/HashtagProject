@@ -27,9 +27,10 @@ public class InventoryManager: MonoBehaviour
         return true;
     }
 
-    public void AddItem(Item item) 
+    public void AddItem(InventoryTile inventoryTile) 
     {
-        _items.Add(item);
+        _items.Add(inventoryTile.item);
+        _inventoryUI.AddItem(inventoryTile);
     }
 
     public bool RemoveItem(Item item) 
