@@ -8,22 +8,52 @@ public class RoomSetup : MonoBehaviour
     public List<GameObject> walls;
     public List<RoomFlavour> flavourSetups;
 
-    public void RandomObjects(int seed)
+    public List<int> RandomObjects(int seed)
     {
+        var setupList = new List<int>();
         Random.InitState(seed);
         var randomFloor = Random.Range(0, floors.Count);
         var randomWall = Random.Range(0, walls.Count);
         var randomFlavour = Random.Range(0, flavourSetups.Count);
+        setupList.Add(randomFloor);
+        setupList.Add(randomWall);
+        setupList.Add(randomFlavour);
+        //foreach (var floor in floors)
+        //{
+        //    floor.SetActive(false);
+        //}
+        //floors[randomFloor].SetActive(true);
+        //foreach (var wall in walls)
+        //{
+        //    wall.SetActive(false);
+        //}
+        //walls[randomWall].SetActive(true);
+        //foreach (var setup in flavourSetups)
+        //{
+        //    foreach (var flavour in setup.flavourObjects)
+        //    {
+        //        flavour.SetActive(false);
+        //    }
+        //}
+        //foreach (var flavour in flavourSetups[randomFlavour].flavourObjects)
+        //{
+        //    flavour.SetActive(true);
+        //}
+        return setupList;
+    }
+
+    public void LoadSetup(List<int> savedSetup)
+    {
         foreach (var floor in floors)
         {
             floor.SetActive(false);
         }
-        floors[randomFloor].SetActive(true);
+        floors[savedSetup[1]].SetActive(true);
         foreach (var wall in walls)
         {
             wall.SetActive(false);
         }
-        walls[randomWall].SetActive(true);
+        walls[savedSetup[2]].SetActive(true);
         foreach (var setup in flavourSetups)
         {
             foreach (var flavour in setup.flavourObjects)
@@ -31,7 +61,7 @@ public class RoomSetup : MonoBehaviour
                 flavour.SetActive(false);
             }
         }
-        foreach (var flavour in flavourSetups[randomFlavour].flavourObjects)
+        foreach (var flavour in flavourSetups[savedSetup[3]].flavourObjects)
         {
             flavour.SetActive(true);
         }
@@ -43,11 +73,11 @@ public class RoomSetup : MonoBehaviour
         public List<GameObject> flavourObjects;
     }
 
-//Editor helpers - probably make it into a custom buttons in editor
+    //Editor helpers - probably make it into a custom buttons in editor
     [ContextMenu("Generate random setup")]
     private void GenerateSetup()
     {
-        var seed = Random.Range(0,int.MaxValue);
+        var seed = Random.Range(0, int.MaxValue);
         RandomObjects(seed);
     }
 

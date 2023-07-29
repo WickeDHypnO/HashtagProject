@@ -15,6 +15,7 @@ public class MapBuilder : MonoBehaviour
     public Transform mapParent;
     private int startY, endX, endY;
     public System.Action<int[][]> OnMapGenerated = delegate { };
+    public Dictionary<Tuple<int, int>, List<int>> roomSetups;
 
     private void Start()
     {
@@ -292,7 +293,24 @@ public class MapBuilder : MonoBehaviour
             return;
         }
 
-        OnMapGenerated(map);       
+        OnMapGenerated(map);
+    }
+
+    public void StoreRooms(Dictionary<Tuple<int, int>, List<int>> rooms)
+    {
+        roomSetups = rooms;
+    }
+
+    public List<int> GetRoom(Tuple<int, int> position)
+    {
+        foreach (var key in roomSetups.Keys)
+        {
+            if (key.Item1 == position.Item1 && key.Item2 == position.Item2)
+            {
+                return roomSetups[key];
+            }
+        }
+        return null;
     }
 
     public List<Tuple<int, int>> FindPathFromStartToEnd(int fromX, int fromY, int toX, int toY)

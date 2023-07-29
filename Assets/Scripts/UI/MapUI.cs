@@ -10,6 +10,8 @@ public class MapUI : MonoBehaviour
     [SerializeField]
     private MapBuilder mapBuilder;
     [SerializeField]
+    private RoomBehaviour roomBehaviour;
+    [SerializeField]
     private List<GameObject> tilePrefabs = new List<GameObject>();
     [SerializeField]
     private float tileSpacing = 100;
@@ -85,8 +87,10 @@ public class MapUI : MonoBehaviour
 
     private void MoveSmoothly(Tuple<int, int> to)
     {
+        FadeOverlay.FadeOut();
         playerObject.transform.DOLocalMove(new Vector3((float)to.Item1 * tileSpacing, (float)to.Item2 * tileSpacing), 0.3f).OnComplete(() =>
         {
+            FadeOverlay.FadeIn();
             EvaluateTile(to);
         });
     }
@@ -96,6 +100,13 @@ public class MapUI : MonoBehaviour
     {
         //TODO: Evaluate tile if it's a chest, fight etc.
         var tileType = mapBuilder.GetTileType(tile.Item1, tile.Item2);
+        var roomSetup = mapBuilder.GetRoom(tile);
+        if (roomSetup == null)
+        {
+            Debug.LogError("No room setup found for specified position, erroring out...");
+            return;
+        }
+        roomBehaviour.LoadSetup(roomSetup);
         switch (tileType)
         {
             case 9:
@@ -104,22 +115,26 @@ public class MapUI : MonoBehaviour
                 break;
             case 3: //Fight
                 Debug.Log("fight tile");
+
+                //TODO: Start fight
+                roomBehaviour.SpawnFight();
                 var clearedFight = Instantiate(clearedPrefab);
                 clearedFight.transform.SetParent(transform);
                 clearedFight.transform.localPosition = new Vector3((float)tile.Item1 * tileSpacing, (float)tile.Item2 * tileSpacing);
                 mapBuilder.SetTileCleared(tile.Item1, tile.Item2);
                 moving = false;
-                //Should break the movement here probably
                 break;
             case 4: //Chest
                 Debug.Log("chest tile");
+
+                //TODO: Start chest
+                roomBehaviour.SpawnChest();
                 var clearedChest = Instantiate(clearedPrefab);
                 clearedChest.transform.SetParent(transform);
                 clearedChest.transform.localPosition = new Vector3((float)tile.Item1 * tileSpacing, (float)tile.Item2 * tileSpacing);
                 _chestUI.GenerateChest();
                 mapBuilder.SetTileCleared(tile.Item1, tile.Item2);
                 moving = false;
-                //Should break the movement here probably
                 break;
             case 1:
             default:
