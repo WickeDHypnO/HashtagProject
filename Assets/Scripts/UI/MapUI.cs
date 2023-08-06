@@ -95,6 +95,14 @@ public class MapUI : MonoBehaviour
         });
     }
 
+    public void ClearTile()
+    {
+        var clearedFight = Instantiate(clearedPrefab);
+        clearedFight.transform.SetParent(transform);
+        clearedFight.transform.localPosition = new Vector3((float)currentPosition.Item1 * tileSpacing, (float)currentPosition.Item2 * tileSpacing);
+        mapBuilder.SetTileCleared(currentPosition.Item1, currentPosition.Item2);
+    }
+
     //This should not be here probably, should be in it's own controller since this is only a UI script
     private void EvaluateTile(Tuple<int, int> tile)
     {
@@ -118,11 +126,9 @@ public class MapUI : MonoBehaviour
 
                 //TODO: Start fight
                 roomBehaviour.SpawnFight();
-                var clearedFight = Instantiate(clearedPrefab);
-                clearedFight.transform.SetParent(transform);
-                clearedFight.transform.localPosition = new Vector3((float)tile.Item1 * tileSpacing, (float)tile.Item2 * tileSpacing);
-                mapBuilder.SetTileCleared(tile.Item1, tile.Item2);
                 moving = false;
+
+
                 break;
             case 4: //Chest
                 Debug.Log("chest tile");

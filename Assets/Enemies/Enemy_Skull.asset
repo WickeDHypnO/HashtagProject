@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   characterName: Haunted Skull
+  image: {fileID: -501636998, guid: a3b4fa9556210784f86ffcdb87e3d8c0, type: 3}
   maxHp: 10
   armor: 2
   actionsPerTurn: 1

@@ -10,8 +10,6 @@ public class MapBuilder : MonoBehaviour
     public int maxY = 5;
     public int roomsNumber = 10;
     public int[][] map = new int[99][];
-    public List<GameObject> mapItems = new List<GameObject>();
-    public GameObject mapTile;
     public Transform mapParent;
     private int startY, endX, endY;
     public System.Action<int[][]> OnMapGenerated = delegate { };

@@ -52,8 +52,10 @@ public class InventoryManager: MonoBehaviour
         if (item.Use())
         {
             _items.Remove(item);
+            FindObjectOfType<FightController>().NextTurn();
             return true;
         };
+        FindObjectOfType<FightController>().NextTurn();
         return false;
 
     }
