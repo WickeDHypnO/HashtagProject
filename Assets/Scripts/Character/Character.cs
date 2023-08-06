@@ -7,6 +7,8 @@ public class Character : ScriptableObject
     public int id;
     public string characterName;
     private int _currentHp;
+    public Sprite image;
+
     public int currentHp { 
         get
         {
