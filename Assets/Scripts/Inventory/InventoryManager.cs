@@ -87,7 +87,7 @@ public class InventoryManager: MonoBehaviour
                 _battleState.player.element = isEquiping ? item.elementType : ElementType.None;
                 break;
             case ItemType.Shield:
-                _battleState.player.armor = isEquiping ? item.currentCharges : 0;
+                _battleState.player.currentArmor = isEquiping ? item.currentCharges : 0;
                 break;
         }
     }

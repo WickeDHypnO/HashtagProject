@@ -72,18 +72,18 @@ public class ActionsManager : MonoBehaviour
 
     private void dealDamage(int damageAfterResistances, Character target)
     {
-        if(target.armor > 0)
+        if(target.currentArmor > 0)
         {
-            target.armor -= damageAfterResistances;
+            target.currentArmor -= damageAfterResistances;
             if(target.isPlayer)
             {
                 //Make check if armor is from consumable, make some calculations
                 _inventoryManager.ReduceCharges(ItemType.Shield, damageAfterResistances);
             }
-            if (target.armor < 0)
+            if (target.currentArmor < 0)
             {
-                target.currentHp -= Mathf.Abs(target.armor);
-                target.armor = 0;
+                target.currentHp -= Mathf.Abs(target.currentArmor);
+                target.currentArmor = 0;
             }
         }
         else

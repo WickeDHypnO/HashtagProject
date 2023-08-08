@@ -8,6 +8,8 @@ public class BattleState : MonoBehaviour
     EnemyBuilder _enemyBuilder;
     [SerializeField]
     ActionsManager _actionsManager;
+    [SerializeField]
+    BattleUI _battleUI;
     public Character player;
     public List<Character> enemies = new List<Character>();
     public List<Character> actionQueue = new List<Character>();
@@ -23,6 +25,14 @@ public class BattleState : MonoBehaviour
         enemies.Add(_enemyBuilder.GenerateRandomEnemy());
         actionQueue.Add(player);
         actionQueue.AddRange(enemies);
+    }
+
+    public void SetTargetHpOrArmor(bool setHp, Character target, int value)
+    {
+        if (setHp)
+        {
+
+        }
     }
 
     public void OnPlayerActionFinished()

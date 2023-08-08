@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
+public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     public Item item;
     public ItemType _slotType = ItemType.None;
@@ -82,14 +82,14 @@ public class InventoryTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         Destroy(gameObject);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Showing tooltip for" + item.name);
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    Debug.Log("Showing tooltip for" + item.name);
+    //}
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("Hiding tooltip for" + item.name);
-    }
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    Debug.Log("Hiding tooltip for" + item.name);
+    //}
     
 }

@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using static Codice.CM.Common.CmCallContext;
 
 public class BattleUI : MonoBehaviour
 {
     [SerializeField]
     BattleState battleState;
-    private TextMeshProUGUI _playerHP;
-    private TextMeshProUGUI _enemyHP;
+    public Slider _playerHP;
+    public Slider _playerArmor;
+    //private TextMeshProUGUI _enemyHP;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +22,19 @@ public class BattleUI : MonoBehaviour
         //TODO: Hardcoded first enemy HP
     }
 
-    //public void SetPlayerHP(int hp)
-    //{
-    //    _playerHP.text = $"Player HP: ${hp}";
-    //}
+    public void SetPlayerHP(int currentHp, int maxHp)
+    {
+        _playerHP.maxValue = maxHp;
+        _playerHP.value = currentHp;
+        _playerHP.GetComponentInChildren<TextMeshProUGUI>().text = $"{currentHp}/{maxHp}";
+    }
+
+    public void SetPlayerArmor(int currentArmor, int maxArmor)
+    {
+        _playerArmor.maxValue = maxArmor;
+        _playerArmor.value = currentArmor;
+        _playerArmor.GetComponentInChildren<TextMeshProUGUI>().text = $"{currentArmor}/{maxArmor}";
+    }
 
     //public void SetEnemyHP(int hp)
     //{
