@@ -70,7 +70,7 @@ public class InventoryManager: MonoBehaviour
         if(item.UseManyCharges(amount))
         {
             _items.Remove(item);
-            _inventoryUI.inventoryTiles.Find(x => x.item == item).DestroyItem();
+            _inventoryUI.backpackTiles.Find(x => x.item == item).DestroyItem();
         }
     }
     public void EquipItem(Item item)
