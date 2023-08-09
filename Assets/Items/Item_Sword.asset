@@ -16,10 +16,10 @@ MonoBehaviour:
   itemName: Sword
   size: 1
   maxCharges: 10
-  currentCharges: 0
+  currentCharges: 10
   itemType: 2
   isEquipped: 0
   elementType: 0
   actions:
   - {fileID: 11400000, guid: c4d5a9fac5c872e46a0680e9697d9cab, type: 2}
-  itemGraphic: {fileID: -985417869, guid: a3b4fa9556210784f86ffcdb87e3d8c0, type: 3}
+  itemGraphic: {fileID: -1215287768, guid: de15cf2dc871edc40baea2d99cc371b2, type: 3}
