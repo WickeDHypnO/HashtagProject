@@ -63,28 +63,35 @@ public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, 
             return;
         }
         var targetInventoryTile = target.GetComponentInParent<InventoryTile>(); 
-        var isItemBeingEquiped = targetInventoryTile._slotType == item.itemType;
+        var isItemBeingEquiped = targetInventoryTile._slotType == item.itemType && !item.isEquipped;
 
         if (isItemBeingEquiped)
         {
             _inventoryManager.TakeOffItem(targetInventoryTile.item);
             _inventoryManager.EquipItem(item);
-            _slotType = targetInventoryTile._slotType;
-        }
-        if (isItemBeingEquiped || targetInventoryTile._slotType == ItemType.Backpack)
-        {
+            //_slotType = targetInventoryTile._slotType;
             var temp = targetInventoryTile.item;
             targetInventoryTile.FillTile(item, _inventoryManager);
             if (temp)
             {
                 FillTile(temp, _inventoryManager);
-            } 
+            }
             else
             {
                 clearTile();
             }
-            //_tileContent.transform.position = targetInventoryTile._tileContent.transform.position;
-            //targetInventoryTile._tileContent.transform.position = _startingPosition;
+        }
+        //if (isItemBeingEquiped || targetInventoryTile._slotType == ItemType.Backpack)
+        //{
+
+        //    //_tileContent.transform.position = targetInventoryTile._tileContent.transform.position;
+        //    //targetInventoryTile._tileContent.transform.position = _startingPosition;
+        //}
+        if(targetInventoryTile._slotType == ItemType.Backpack)
+        {
+            _inventoryManager.TakeOffItem(item);
+            targetInventoryTile.FillTile(item, _inventoryManager);
+            clearTile();
         }
         _tileContent.transform.position = _startingPosition;
 
@@ -109,10 +116,10 @@ public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, 
                 Debug.LogWarning(item.name + " not added");
             }
         }
-        else if(_inventoryManager.UseItem(item))
-        {
-            DestroyItem();
-        };
+        //else if(_inventoryManager.UseItem(item))
+        //{
+        //    DestroyItem();
+        //};
     }
 
     public void DestroyItem()

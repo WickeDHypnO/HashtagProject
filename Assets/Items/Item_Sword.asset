@@ -22,4 +22,6 @@ MonoBehaviour:
   elementType: 0
   actions:
   - {fileID: 11400000, guid: c4d5a9fac5c872e46a0680e9697d9cab, type: 2}
+  - {fileID: 11400000, guid: c5d888b9029844d4ea3a8799831b671d, type: 2}
+  - {fileID: 11400000, guid: 9017a00d91d99e54f93fc25600609db4, type: 2}
   itemGraphic: {fileID: -1215287768, guid: de15cf2dc871edc40baea2d99cc371b2, type: 3}

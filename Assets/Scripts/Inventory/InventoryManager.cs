@@ -16,6 +16,8 @@ public class InventoryManager: MonoBehaviour
     BattleState _battleState;
     [SerializeField]
     InventoryUI _inventoryUI;
+    [SerializeField]
+    BattleSkillbar _battleSkillbar;
 
     public int currentSize => _items.Sum(i => i.size);
     public bool CanAddItem(Item item)
@@ -76,6 +78,10 @@ public class InventoryManager: MonoBehaviour
     public void EquipItem(Item item)
     {
         item.isEquipped = true;
+        if(item.actions.Count > 0)
+        {
+            _battleSkillbar.AddAction(item);
+        }
         handleEquipItem(item, true);
     }
 
@@ -98,6 +104,10 @@ public class InventoryManager: MonoBehaviour
         {
             handleEquipItem(item, false);
             item.isEquipped = false;
+            if(item.actions.Count > 0)
+            {
+                _battleSkillbar.RemoveAction(item);
+            }
         }
     }
 

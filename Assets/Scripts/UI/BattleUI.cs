@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static Codice.CM.Common.CmCallContext;
 
 public class BattleUI : MonoBehaviour
 {
     [SerializeField]
     BattleState battleState;
+    [SerializeField]
+    BattleSkillbar battleSkillbar;
     public Slider _playerHP;
     public Slider _playerArmor;
     //private TextMeshProUGUI _enemyHP;
