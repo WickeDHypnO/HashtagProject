@@ -16,4 +16,6 @@ public class EntityController : MonoBehaviour
     {
         animator.SetTrigger("attack");
     }
+
+    public bool IsDead() => currentData.currentHp <= 0;
 }

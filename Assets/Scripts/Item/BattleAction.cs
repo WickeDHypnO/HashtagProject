@@ -6,20 +6,20 @@ using UnityEngine.UI;
 
 public class BattleAction : MonoBehaviour, IPointerClickHandler
 {
-    private BattleState _battleState;
+    private FightController _fightController;
     private ActionsManager _actionsManager;
     private Action _action;
     public Item item;
     public void OnPointerClick(PointerEventData eventData)
     {
-        _actionsManager.ExecutePlayerAction(_action, _battleState.player, _battleState.enemies[0], item.elementType);
+        _actionsManager.ExecutePlayerAction(_action, FindObjectOfType<FightController>().player.currentData, FindObjectOfType<FightController>().enemies[0].currentData, item.elementType);
         FindObjectOfType<FightController>().NextTurn();
     }
 
-    public void Generate(Action action, Item item, ActionsManager actionsManager, BattleState battleState)
+    public void Generate(Action action, Item item, ActionsManager actionsManager, FightController fightController)
     {
         _actionsManager = actionsManager;
-        _battleState = battleState;
+        _fightController = fightController;
         this.item = item;
         GetComponent<Image>().sprite = item.itemGraphic;
         _action = action;

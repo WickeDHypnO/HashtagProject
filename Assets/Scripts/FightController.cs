@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,18 +7,21 @@ public class FightController : MonoBehaviour
 {
     public static System.Action OnTurnEnd;
     public static System.Action OnPlayerTurn;
-    private PlayerController player;
+    public PlayerController player;
     [SerializeField]
-    private List<EnemyController> enemies;
+    public List<EnemyController> enemies;
     private Queue<EntityController> turnQueue;
+    [SerializeField]
+    private ActionsManager _actionsManager;
 
     private void OnEnable()
     {
         var enemies = new List<Character>();
+        _actionsManager = FindObjectOfType<ActionsManager>();
         var enemy = FindObjectOfType<EnemyBuilder>().GenerateRandomEnemy();
         enemies.Add(enemy);
-        var enemy2 = FindObjectOfType<EnemyBuilder>().GenerateRandomEnemy();
-        enemies.Add(enemy2);
+        //var enemy2 = FindObjectOfType<EnemyBuilder>().GenerateRandomEnemy();
+        //enemies.Add(enemy2);
         player = FindObjectOfType<PlayerController>();
         InitializeFight(enemies);
     }
@@ -31,7 +35,7 @@ public class FightController : MonoBehaviour
         {
             if (enemyData.Count > i)
             {
-                enemies[i].InitializeEnemy(enemyData[i]);
+                enemies[i].InitializeEnemy(enemyData[i], _actionsManager);
                 turnQueue.Enqueue(enemies[i]);
             }
             else
@@ -55,8 +59,13 @@ public class FightController : MonoBehaviour
             else
             {
                 EnemyTurn(currentTurnEntity as EnemyController);
+                if (turnQueue.Count == 1)
+                {
+                    EndFight(true);
+                }
             }
             turnQueue.Enqueue(currentTurnEntity);
+
         }
         else
         {
@@ -70,6 +79,8 @@ public class FightController : MonoBehaviour
         {
             FindObjectOfType<MapUI>().ClearTile();
         }
+        Debug.Log("deadge");
+        return;
         //TODO: Fight ended, allow traversal to next room or end game if lost fight
     }
 
@@ -84,8 +95,15 @@ public class FightController : MonoBehaviour
 
     private void EnemyTurn(EnemyController enemy)
     {
+        if (enemy.IsDead())
+        {
+            enemy.RemoveEnemy();
+            return;
+        }
         enemy.OnAttackEnded += NextTurn;
+
         enemy.EvaluateOptions();
+
         if (player.currentData.currentHp <= 0)
         {
             EndFight(false);

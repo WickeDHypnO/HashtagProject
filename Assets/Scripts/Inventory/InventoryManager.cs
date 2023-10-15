@@ -13,11 +13,11 @@ public class InventoryManager: MonoBehaviour
     [SerializeField]
     ActionsManager _actionsManager;
     [SerializeField]
-    BattleState _battleState;
-    [SerializeField]
     InventoryUI _inventoryUI;
     [SerializeField]
     BattleSkillbar _battleSkillbar;
+    [SerializeField]
+    FightController _fightController;
 
     public int currentSize => _items.Sum(i => i.size);
     public bool CanAddItem(Item item)
@@ -43,13 +43,17 @@ public class InventoryManager: MonoBehaviour
 
     public bool UseItem(Item item)
     {
+        if(_fightController == null)
+        {
+            _fightController = FindObjectOfType<FightController>();
+        }
         if(!item.isEquipped && item.itemType != ItemType.Consumable)
         {
             Debug.Log($"{item.itemName} is not equipped");
             return false;
         }
         //TODO: Hardcoded use action[0], if multiple choices => base action on clicked UI element + hardcoded target to first enemy
-        _actionsManager.ExecutePlayerAction(item.actions[0], _battleState.player, _battleState.enemies[0], item.elementType);
+        _actionsManager.ExecutePlayerAction(item.actions[0], _fightController.player.currentData, _fightController.enemies[0].currentData, item.elementType);
         
         if (item.Use())
         {
@@ -90,10 +94,10 @@ public class InventoryManager: MonoBehaviour
         switch(item.itemType)
         {
             case ItemType.Armor:
-                _battleState.player.element = isEquiping ? item.elementType : ElementType.None;
+                _fightController.player.currentData.element = isEquiping ? item.elementType : ElementType.None;
                 break;
             case ItemType.Shield:
-                _battleState.player.currentArmor = isEquiping ? item.currentCharges : 0;
+                _fightController.player.currentData.currentArmor = isEquiping ? item.currentCharges : 0;
                 break;
         }
     }

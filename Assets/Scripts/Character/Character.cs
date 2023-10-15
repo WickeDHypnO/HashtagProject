@@ -63,6 +63,11 @@ public class Character : ScriptableObject
         currentHp = maxHp;
     }
 
+    private void OnEnable()
+    {
+        currentHp = maxHp;
+    }
+
     public Action GetRandomAction()
     {
         return actions[Random.Range(0, actions.Count)];

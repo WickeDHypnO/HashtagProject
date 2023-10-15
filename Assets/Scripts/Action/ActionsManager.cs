@@ -6,10 +6,9 @@ using UnityEngine;
 public class ActionsManager : MonoBehaviour
 {
     [SerializeField]
-    BattleState _battleState;
-    [SerializeField]
     InventoryManager _inventoryManager;
-
+    [SerializeField]
+    FightController _fightController;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +24,6 @@ public class ActionsManager : MonoBehaviour
     public void ExecutePlayerAction(Action action, Character user, Character target = null, ElementType itemElement = ElementType.None)
     {
         ExecuteAction(action, user, target, itemElement);
-        _battleState.OnPlayerActionFinished();
     }
 
     public void ExecuteAction(Action action, Character user, Character target = null, ElementType usedElement = ElementType.None)
@@ -94,27 +92,28 @@ public class ActionsManager : MonoBehaviour
     private List<Character> getTargets(ActionTarget actionTarget, Character user, Character target = null)
     {
         var targets = new List<Character>();
+        _fightController = FindObjectOfType<FightController>();
         switch (actionTarget)
         {
             case ActionTarget.Self:
-                targets.Add(user.isPlayer ? _battleState.player : user);
+                targets.Add(user.isPlayer ? _fightController.player.currentData : user);
                 break;
             case ActionTarget.Target:
-                targets.Add(user.isPlayer ? target : _battleState.player);
+                targets.Add(user.isPlayer ? target : _fightController.player.currentData);
                 break;
             case ActionTarget.AllTargets:
                 if(user.isPlayer)
                 {
-                    targets.AddRange(_battleState.enemies);
+                    targets.AddRange(_fightController.enemies.Where(x => x.currentData != null).Select(x => x.currentData));
                 } 
                 else
                 {
-                    targets.Add(_battleState.player);
+                    targets.Add(_fightController.player.currentData);
                 }
                 break;
             case ActionTarget.Everyone:
-                targets.AddRange(_battleState.enemies);
-                targets.Add(_battleState.player);
+                targets.AddRange(_fightController.enemies.Select(x => x.currentData));
+                targets.Add(_fightController.player.currentData);
                 break;
         }
         return targets;

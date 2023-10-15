@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     [SerializeField]
-    BattleState battleState;
-    [SerializeField]
     BattleSkillbar battleSkillbar;
     public Slider _playerHP;
     public Slider _playerArmor;

@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class EnemyController : EntityController
 {
-    public void InitializeEnemy(Character enemyData)
+    ActionsManager _actionsManager;
+    public void InitializeEnemy(Character enemyData, ActionsManager actionsManager)
     {
-        currentData = enemyData;
+        currentData = Instantiate(enemyData);
+        _actionsManager = actionsManager;
         GetComponent<SpriteRenderer>().sprite = enemyData.image;
+    }
+
+    public void RemoveEnemy()
+    {
+        currentData = null;
+        GetComponent<SpriteRenderer>().sprite = null;
     }
 
     public void EnemyAttackEnd()
@@ -21,7 +29,7 @@ public class EnemyController : EntityController
 
     public void EvaluateOptions()
     {
-        //TODO: Make some AI to decide what to do, attack for now
+        _actionsManager.ExecuteAction(currentData.GetRandomAction(), currentData, null, currentData.element);
         Attack();
     }
 }
