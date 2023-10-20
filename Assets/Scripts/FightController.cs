@@ -17,12 +17,12 @@ public class FightController : MonoBehaviour
     private void OnEnable()
     {
         var enemies = new List<Character>();
-        _actionsManager = FindObjectOfType<ActionsManager>();
-        var enemy = FindObjectOfType<EnemyBuilder>().GenerateRandomEnemy();
+        _actionsManager = FindFirstObjectByType<ActionsManager>();
+        var enemy = FindFirstObjectByType<EnemyBuilder>().GenerateRandomEnemy();
         enemies.Add(enemy);
-        //var enemy2 = FindObjectOfType<EnemyBuilder>().GenerateRandomEnemy();
+        //var enemy2 = FindFirstObjectByType<EnemyBuilder>().GenerateRandomEnemy();
         //enemies.Add(enemy2);
-        player = FindObjectOfType<PlayerController>();
+        player = FindFirstObjectByType<PlayerController>();
         InitializeFight(enemies);
     }
 
@@ -77,9 +77,8 @@ public class FightController : MonoBehaviour
     {
         if (won)
         {
-            FindObjectOfType<MapUI>().ClearTile();
+            FindFirstObjectByType<MapUI>().ClearTile();
         }
-        Debug.Log("deadge");
         return;
         //TODO: Fight ended, allow traversal to next room or end game if lost fight
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
+public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item;
     public ItemType _slotType = ItemType.None;
@@ -13,17 +13,18 @@ public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, 
     private Image _tileContent;
     protected InventoryManager _inventoryManager;
     private Vector2 _startingPosition;
+    private TooltipUi _tooltipUi;
 
     private void Awake()
     {
         _tileContent = transform.GetChild(0).GetComponent<Image>();
+        _tooltipUi = FindFirstObjectByType<TooltipUi>();
     }
 
     public void FillTile(Item item, InventoryManager inventoryManager)
     {
         this.item = item;
         _inventoryManager = inventoryManager;
-
         _tileContent.color = new Color(255, 255, 255, 255);
         _tileContent.sprite = item.itemGraphic;
 
@@ -38,7 +39,7 @@ public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _startingPosition = _tileContent.transform.position;
+        _startingPosition = _tileContent.transform.localPosition;
         _tileContent.raycastTarget = false;
         var canvas = _tileContent.gameObject.AddComponent<Canvas>();
         canvas.overrideSorting = true;
@@ -47,7 +48,7 @@ public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
-        _tileContent.transform.position = Input.mousePosition;
+        _tileContent.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -59,7 +60,7 @@ public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, 
 
         if (target == null || target.GetComponentInParent<InventoryTile>() == null || target.GetComponentInParent<InventoryTile>()._slotType == ItemType.None)
         {
-            _tileContent.transform.position = _startingPosition;
+            _tileContent.transform.localPosition = _startingPosition;
             return;
         }
         var targetInventoryTile = target.GetComponentInParent<InventoryTile>(); 
@@ -93,7 +94,7 @@ public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, 
             targetInventoryTile.FillTile(item, _inventoryManager);
             clearTile();
         }
-        _tileContent.transform.position = _startingPosition;
+        _tileContent.transform.localPosition = _startingPosition;
 
     }
 
@@ -124,17 +125,23 @@ public class InventoryTile : MonoBehaviour, IPointerClickHandler, IDragHandler, 
 
     public void DestroyItem()
     {
-        Destroy(gameObject);
+        _inventoryManager.TakeOffItem(item);
+        clearTile();
     }
 
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    Debug.Log("Showing tooltip for" + item.name);
-    //}
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item)
+        {
+            _tooltipUi.SetTooltipText(@$"{item.itemName} 
+Charges: {item.currentCharges} / {item.maxCharges} 
+Actions: {item.actions.Count}");
+        }
+    }
 
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    Debug.Log("Hiding tooltip for" + item.name);
-    //}
-    
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _tooltipUi.SetTooltipText("");
+    }
+
 }

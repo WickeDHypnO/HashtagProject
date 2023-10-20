@@ -79,6 +79,7 @@ public class MapUI : MonoBehaviour
             var dot = Instantiate(pathDot);
             dot.transform.SetParent(transform);
             dot.transform.localPosition = new Vector3((float)point.Item1 * tileSpacing, (float)point.Item2 * tileSpacing);
+            dot.transform.localScale = new Vector3(1, 1, 1);
             pathList.Add(dot);
             queuedMovements.Enqueue(point);
         }
@@ -100,6 +101,7 @@ public class MapUI : MonoBehaviour
         var clearedFight = Instantiate(clearedPrefab);
         clearedFight.transform.SetParent(transform);
         clearedFight.transform.localPosition = new Vector3((float)currentPosition.Item1 * tileSpacing, (float)currentPosition.Item2 * tileSpacing);
+        clearedFight.transform.localScale = new Vector3(1, 1, 1);
         mapBuilder.SetTileCleared(currentPosition.Item1, currentPosition.Item2);
     }
 
@@ -138,6 +140,7 @@ public class MapUI : MonoBehaviour
                 var clearedChest = Instantiate(clearedPrefab);
                 clearedChest.transform.SetParent(transform);
                 clearedChest.transform.localPosition = new Vector3((float)tile.Item1 * tileSpacing, (float)tile.Item2 * tileSpacing);
+                clearedChest.transform.localScale = new Vector3(1, 1, 1);
                 _chestUI.GenerateChest();
                 mapBuilder.SetTileCleared(tile.Item1, tile.Item2);
                 moving = false;
@@ -169,6 +172,7 @@ public class MapUI : MonoBehaviour
                     var go = Instantiate(tilePrefabs[map[x][y]]);
                     go.transform.SetParent(transform);
                     go.transform.localPosition = new Vector3((float)x * tileSpacing, (float)y * tileSpacing);
+                    go.transform.localScale = new Vector3(1, 1, 1);
                     go.GetComponent<MapTile>().x = x;
                     go.GetComponent<MapTile>().y = y;
                     go.GetComponent<Button>().onClick.AddListener(() =>
@@ -181,6 +185,7 @@ public class MapUI : MonoBehaviour
                         playerObject = Instantiate(playerPrefab);
                         playerObject.transform.SetParent(transform);
                         playerObject.transform.localPosition = new Vector3((float)x * tileSpacing, (float)y * tileSpacing);
+                        playerObject.transform.localScale = new Vector3(1, 1, 1);
                     }
                 }
             }

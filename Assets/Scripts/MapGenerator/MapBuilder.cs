@@ -9,6 +9,8 @@ public class MapBuilder : MonoBehaviour
     public int maxX = 10;
     public int maxY = 5;
     public int roomsNumber = 10;
+    public int maxChests = 3;
+    public int maxFights = 3;
     public int[][] map = new int[99][];
     public Transform mapParent;
     private int startY, endX, endY;
@@ -233,11 +235,11 @@ public class MapBuilder : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             int startX = UnityEngine.Random.Range(1, maxX - 1);
-            RandomWalkGeneration(startX, 4, false);
+            RandomWalkGeneration(startX, 2, false);
         }
 
-        int remainingChests = 3;
-        int remainingFights = 3;
+        int remainingChests = maxChests;
+        int remainingFights = maxFights;
 
         while (remainingChests > 0 || remainingFights > 0)
         {

@@ -21,12 +21,12 @@ public class ChestUI : MonoBehaviour
     }
     public void GenerateChest()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 3; i++)
         {
             var prefab = Instantiate(itemPrefab, transform);
             var item = Instantiate(_itemBuilder.GenerateRandomItem());
             prefab.FillTile(item, _inventoryManager);
-            prefab.transform.position = new Vector3(Random.Range(200f, 400f), Random.Range(200f, 400f));
+            prefab.transform.localPosition = new Vector3(Random.Range(-300f, -340f), Random.Range(-50f, -30f));
         }
     }
 }

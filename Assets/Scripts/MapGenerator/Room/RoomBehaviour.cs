@@ -47,7 +47,7 @@ public class RoomBehaviour : MonoBehaviour
     {
         if (currenChest) Destroy(currenChest);
         if (currentFight) Destroy(currentFight);
-        Debug.Log($"Loading setup {setup[0]}, {setup[1]}, {setup[2]},{setup[3]}");
+        //Debug.Log($"Loading setup {setup[0]}, {setup[1]}, {setup[2]},{setup[3]}");
         roomData.LoadSetup(setup);
     }
 
@@ -61,13 +61,18 @@ public class RoomBehaviour : MonoBehaviour
         currentFight = Instantiate(fightPrefab, transform);
     }
 
-    [ContextMenu("Generate new room")]
-    public void GenerateNewRoom(RoomType type)
+    public void GenerateNewRoom(RoomType type = RoomType.Nothing)
     {
         var seed = UnityEngine.Random.Range(0, int.MaxValue);
         roomData.GenerateNewSetup(seed);
         roomType = type;
         //TODO: Generate interaction according to the room type
         OnRoomGenerated();
+    }
+
+    [ContextMenu("Generate new room")]
+    public void GenerateRoomContext()
+    {
+        GenerateNewRoom();
     }
 }

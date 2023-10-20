@@ -61,10 +61,11 @@ public class RoomSetup : MonoBehaviour
                 flavour.SetActive(false);
             }
         }
-        foreach (var flavour in flavourSetups[savedSetup[3]].flavourObjects)
-        {
-            flavour.SetActive(true);
-        }
+        //foreach (var flavour in flavourSetups)
+        //{
+        //    var rand = Random.Range(0, flavour.flavourObjects.Count);
+        //    flavour.flavourObjects[rand].SetActive(true);
+        //}
     }
 
     [System.Serializable]

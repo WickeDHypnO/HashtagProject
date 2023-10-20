@@ -22,7 +22,7 @@ public class Room
         randomedSetup.Add(randomSetupIndex);
         //currentSetup.gameObject.SetActive(true);
         randomedSetup.AddRange(currentSetup.RandomObjects(seed));
-        Debug.Log($"Seed: {seed}, Randomed setup: {randomedSetup[0]}, {randomedSetup[1]}, {randomedSetup[2]}, {randomedSetup[3]}");
+        //Debug.Log($"Seed: {seed}, Randomed setup: {randomedSetup[0]}, {randomedSetup[1]}, {randomedSetup[2]}, {randomedSetup[3]}");
         return randomedSetup;
     }
 

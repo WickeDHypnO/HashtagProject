@@ -92,7 +92,7 @@ public class ActionsManager : MonoBehaviour
     private List<Character> getTargets(ActionTarget actionTarget, Character user, Character target = null)
     {
         var targets = new List<Character>();
-        _fightController = FindObjectOfType<FightController>();
+        _fightController = FindFirstObjectByType<FightController>();
         switch (actionTarget)
         {
             case ActionTarget.Self:

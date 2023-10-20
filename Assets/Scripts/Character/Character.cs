@@ -59,7 +59,7 @@ public class Character : ScriptableObject
     public List<Action> actions;
     void Awake()
     {
-        battleUi = FindObjectOfType<BattleUI>();
+        battleUi = FindFirstObjectByType<BattleUI>();
         currentHp = maxHp;
     }
 

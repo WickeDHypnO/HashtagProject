@@ -41,11 +41,11 @@ public class InventoryManager: MonoBehaviour
         return true;
     }
 
-    public bool UseItem(Item item)
+    public bool UseItem(Item item, Action selectedAction)
     {
         if(_fightController == null)
         {
-            _fightController = FindObjectOfType<FightController>();
+            _fightController = FindFirstObjectByType<FightController>();
         }
         if(!item.isEquipped && item.itemType != ItemType.Consumable)
         {
@@ -53,15 +53,15 @@ public class InventoryManager: MonoBehaviour
             return false;
         }
         //TODO: Hardcoded use action[0], if multiple choices => base action on clicked UI element + hardcoded target to first enemy
-        _actionsManager.ExecutePlayerAction(item.actions[0], _fightController.player.currentData, _fightController.enemies[0].currentData, item.elementType);
+        _actionsManager.ExecutePlayerAction(selectedAction, _fightController.player.currentData, _fightController.enemies[0].currentData, item.elementType);
         
         if (item.Use())
         {
             _items.Remove(item);
-            FindObjectOfType<FightController>().NextTurn();
+            FindFirstObjectByType<FightController>().NextTurn();
             return true;
         };
-        FindObjectOfType<FightController>().NextTurn();
+        FindFirstObjectByType<FightController>().NextTurn();
         return false;
 
     }

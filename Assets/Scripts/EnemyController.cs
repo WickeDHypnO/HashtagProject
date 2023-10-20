@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyController : EntityController
 {
     ActionsManager _actionsManager;
+    [SerializeField]
+    GameObject _hpBar;
     public void InitializeEnemy(Character enemyData, ActionsManager actionsManager)
     {
         currentData = Instantiate(enemyData);
@@ -31,5 +34,13 @@ public class EnemyController : EntityController
     {
         _actionsManager.ExecuteAction(currentData.GetRandomAction(), currentData, null, currentData.element);
         Attack();
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentData)
+        {
+            _hpBar.transform.localScale = new Vector2((float)currentData.currentHp / (float)currentData.maxHp, _hpBar.transform.localScale.y);
+        }
     }
 }

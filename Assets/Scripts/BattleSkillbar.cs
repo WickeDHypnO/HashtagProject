@@ -7,17 +7,17 @@ public class BattleSkillbar : MonoBehaviour
     [SerializeField] 
     BattleAction _actionPrefab;
     [SerializeField]
-    ActionsManager _actionsManager;
+    InventoryManager _inventoryManager;
     [SerializeField]
-    FightController _fightController;
+    TooltipUi _tooltipUi;
     List<BattleAction> actions = new List<BattleAction>();
-    
+
     public void AddAction(Item item)
     {
         foreach(var action in item.actions) 
         {
             var prefab = Instantiate(_actionPrefab);
-            prefab.Generate(action, item, _actionsManager, _fightController);
+            prefab.Generate(action, item, _tooltipUi, _inventoryManager, this);
             prefab.transform.SetParent(transform, false);
             actions.Add(prefab);
         }
