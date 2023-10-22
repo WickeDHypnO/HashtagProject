@@ -119,11 +119,11 @@ public class MapUI : MonoBehaviour
         roomBehaviour.LoadSetup(roomSetup);
         switch (tileType)
         {
-            case 9:
+            case MapTileType.End:
                 Debug.Log("end of dungeon, genereate new one");
                 moving = false;
                 break;
-            case 3: //Fight
+            case MapTileType.Fight: //Fight
                 Debug.Log("fight tile");
 
                 //TODO: Start fight
@@ -132,7 +132,7 @@ public class MapUI : MonoBehaviour
 
 
                 break;
-            case 4: //Chest
+            case MapTileType.Chest: //Chest
                 Debug.Log("chest tile");
 
                 //TODO: Start chest
@@ -145,7 +145,7 @@ public class MapUI : MonoBehaviour
                 mapBuilder.SetTileCleared(tile.Item1, tile.Item2);
                 moving = false;
                 break;
-            case 1:
+            case MapTileType.Empty:
             default:
                 if (queuedMovements.Count > 0)
                 {
@@ -161,7 +161,7 @@ public class MapUI : MonoBehaviour
         selectedPosition = tile;
     }
 
-    private void CreateMapUI(int[][] map)
+    private void CreateMapUI(MapTileType[][] map)
     {
         for (int x = 0; x < map.Length; x++)
         {
@@ -169,7 +169,7 @@ public class MapUI : MonoBehaviour
             {
                 if (map[x][y] != 0)
                 {
-                    var go = Instantiate(tilePrefabs[map[x][y]]);
+                    var go = Instantiate(tilePrefabs[(int)map[x][y]]);
                     go.transform.SetParent(transform);
                     go.transform.localPosition = new Vector3((float)x * tileSpacing, (float)y * tileSpacing);
                     go.transform.localScale = new Vector3(1, 1, 1);
@@ -179,17 +179,24 @@ public class MapUI : MonoBehaviour
                     {
                         CalculatePath(go.GetComponent<MapTile>().x, go.GetComponent<MapTile>().y);
                     });
-                    if (map[x][y] == 1)
+                    if (map[x][y] == MapTileType.Start)
                     {
                         currentPosition = new Tuple<int, int>(x, y);
                         playerObject = Instantiate(playerPrefab);
                         playerObject.transform.SetParent(transform);
                         playerObject.transform.localPosition = new Vector3((float)x * tileSpacing, (float)y * tileSpacing);
                         playerObject.transform.localScale = new Vector3(1, 1, 1);
+                        StartCoroutine(LoadFirstRoom(x, y));
                     }
                 }
             }
         }
         playerObject.transform.SetAsLastSibling();
+    }
+
+    IEnumerator LoadFirstRoom(int x, int y)
+    {
+        yield return new WaitForSeconds(0.5f);
+        EvaluateTile(new Tuple<int, int>(x, y));
     }
 }

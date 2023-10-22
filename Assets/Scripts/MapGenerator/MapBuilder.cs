@@ -4,6 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum MapTileType
+{
+    None, 
+    Start,
+    Empty,
+    Fight,
+    Chest,
+    End
+}
+
 public class MapBuilder : MonoBehaviour
 {
     public int maxX = 10;
@@ -11,10 +21,10 @@ public class MapBuilder : MonoBehaviour
     public int roomsNumber = 10;
     public int maxChests = 3;
     public int maxFights = 3;
-    public int[][] map = new int[99][];
+    public MapTileType[][] map = new MapTileType[99][];
     public Transform mapParent;
     private int startY, endX, endY;
-    public System.Action<int[][]> OnMapGenerated = delegate { };
+    public System.Action<MapTileType[][]> OnMapGenerated = delegate { };
     public Dictionary<Tuple<int, int>, List<int>> roomSetups;
 
     private void Start()
@@ -36,9 +46,10 @@ public class MapBuilder : MonoBehaviour
 
         if (ignoreFilled)
         {
-            map[currentX][currentY] = 1;
+            map[currentX][currentY] = MapTileType.Start;
         }
 
+        int tries = 100000;
         while (currentX < maxX - 1)
         {
             var direction = UnityEngine.Random.Range(-1, ignoreFilled ? 2 : 3);
@@ -88,15 +99,20 @@ public class MapBuilder : MonoBehaviour
             }
             else if (map[currentX][currentY] == 0)
             {
-                map[currentX][currentY] = 2;
+                map[currentX][currentY] = MapTileType.Empty;
             }
 
             lastDirection = direction;
+            tries--;
+            if (tries <= 0)
+            {
+                break;
+            }
         }
 
         if (ignoreFilled)
         {
-            map[currentX][currentY] = 9;
+            map[currentX][currentY] = MapTileType.End;
             endX = currentX;
             endY = currentY;
         }
@@ -114,7 +130,7 @@ public class MapBuilder : MonoBehaviour
                 randX = UnityEngine.Random.Range(0, maxX);
                 randY = UnityEngine.Random.Range(0, maxY);
             }
-            map[randX][randY] = 1;
+            map[randX][randY] = MapTileType.Start;
             remainingRooms--;
         }
     }
@@ -126,7 +142,7 @@ public class MapBuilder : MonoBehaviour
         public matrixNode parent;
     }
 
-    public static matrixNode AStar(int[][] matrix, int fromX, int fromY, int toX, int toY)
+    public static matrixNode AStar(MapTileType[][] matrix, int fromX, int fromY, int toX, int toY)
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // in this version an element in a matrix can move left/up/right/down in one step, two steps for a diagonal move.
@@ -187,7 +203,7 @@ public class MapBuilder : MonoBehaviour
                 int nbrY = current.Value.y + plusXY.Value;
                 string nbrKey = nbrX.ToString() + nbrY.ToString();
                 if (nbrX < 0 || nbrY < 0 || nbrX >= maxX || nbrY >= maxY
-                    || matrix[nbrX][nbrY] == 0 //obstacles marked by 'X'
+                    || matrix[nbrX][nbrY] == MapTileType.None //obstacles marked by 'X'
                     || reds.ContainsKey(nbrKey))
                     continue;
 
@@ -218,52 +234,81 @@ public class MapBuilder : MonoBehaviour
     [ContextMenu("Generate")]
     public void GenerateMap()
     {
-        map = new int[maxX][];
+        map = new MapTileType[maxX][];
         for (int i = 0; i < maxX; i++)
         {
-            map[i] = new int[maxY];
+            map[i] = new MapTileType[maxY];
         }
 
         startY = UnityEngine.Random.Range(0, maxY);
         RandomWalkGeneration(0, startY, true);
 
-        for (int i = 0; i < 2; i++)
-        {
-            int startX = UnityEngine.Random.Range(1, maxX - 1);
-            RandomWalkGeneration(startX, 0, false);
-        }
-        for (int i = 0; i < 2; i++)
-        {
-            int startX = UnityEngine.Random.Range(1, maxX - 1);
-            RandomWalkGeneration(startX, 2, false);
-        }
+        //for (int i = 0; i < 2; i++)
+        //{
+        //    int startX = UnityEngine.Random.Range(1, maxX - 1);
+        //    RandomWalkGeneration(startX, 0, false);
+        //}
+        //for (int i = 0; i < 2; i++)
+        //{
+        //    int startX = UnityEngine.Random.Range(1, maxX - 1);
+        //    RandomWalkGeneration(startX, 2, false);
+        //}
 
         int remainingChests = maxChests;
         int remainingFights = maxFights;
 
-        while (remainingChests > 0 || remainingFights > 0)
+
+        var freeTilesList = new List<Tuple<int, int>>();
+        for (int i = 0; i < maxX; i++)
+        {
+            for (int j = 0; j < maxY; j++)
+            {
+                if (map[i][j] == MapTileType.Empty)
+                {
+                    freeTilesList.Add(new Tuple<int, int>(i, j));
+                }
+            }
+        }
+
+        int tries = 100000;
+        while (remainingChests > 0 || remainingFights > 0 || freeTilesList.Count > 0) //TODO: Get all tiles and assign chests and fights only to possible matches
         {
             if (remainingChests > 0)
             {
-                var randomX = UnityEngine.Random.Range(0, maxX - 1);
-                var randomY = UnityEngine.Random.Range(0, maxY - 1);
+                var randomTile = freeTilesList[UnityEngine.Random.Range(0, freeTilesList.Count)];
+                map[randomTile.Item1][randomTile.Item2] = MapTileType.Chest;
+                remainingChests--;
+                freeTilesList.Remove(randomTile);
+               
+                //var randomX = UnityEngine.Random.Range(0, maxX - 1);
+                //var randomY = UnityEngine.Random.Range(0, maxY - 1);
 
-                if (map[randomX][randomY] == 2)
-                {
-                    map[randomX][randomY] = 4;
-                    remainingChests--;
-                }
+                //if (map[randomX][randomY] == 2)
+                //{
+                //    map[randomX][randomY] = 4;
+                //    remainingChests--;
+                //}
             }
             if (remainingFights > 0)
             {
-                var randomX = UnityEngine.Random.Range(0, maxX - 1);
-                var randomY = UnityEngine.Random.Range(0, maxY - 1);
+                var randomTile = freeTilesList[UnityEngine.Random.Range(0, freeTilesList.Count)];
+                map[randomTile.Item1][randomTile.Item2] = MapTileType.Fight;
+                remainingFights--;
+                freeTilesList.Remove(randomTile);
 
-                if (map[randomX][randomY] == 2)
-                {
-                    map[randomX][randomY] = 3;
-                    remainingFights--;
-                }
+                //var randomX = UnityEngine.Random.Range(0, maxX - 1);
+                //var randomY = UnityEngine.Random.Range(0, maxY - 1);
+
+                //if (map[randomX][randomY] == 2)
+                //{
+                //    map[randomX][randomY] = 3;
+                //    remainingFights--;
+                //}
+            }
+            tries--;
+            if (tries <= 0)
+            {
+                break;
             }
         }
 
@@ -346,13 +391,13 @@ public class MapBuilder : MonoBehaviour
         return pathList;
     }
 
-    public int GetTileType(int x, int y)
+    public MapTileType GetTileType(int x, int y)
     {
         return map[x][y];
     }
 
     public void SetTileCleared(int x, int y)
     {
-        map[x][y] = 1;
+        map[x][y] = MapTileType.Empty;
     }
 }

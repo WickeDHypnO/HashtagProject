@@ -26,7 +26,7 @@ public class RoomBehaviour : MonoBehaviour
         mapBuilder.OnMapGenerated += GenerateRooms;
     }
 
-    private void GenerateRooms(int[][] map)
+    private void GenerateRooms(MapTileType[][] map)
     {
         Dictionary<Tuple<int, int>, List<int>> rooms = new Dictionary<Tuple<int, int>, List<int>>();
         for (int x = 0; x < map.Length; x++)

@@ -932,7 +932,7 @@ MonoBehaviour:
   - {fileID: 8198834718179724757, guid: 109b7316be5eed04d80f748874342ae9, type: 3}
   - {fileID: 3608315466470196223, guid: 87384dab518a93b4bbcceb707a334931, type: 3}
   - {fileID: 7904340876652515882, guid: 208bf548d45f54b42801cd3a957a86cd, type: 3}
-  - {fileID: 0}
+  - {fileID: 6711215287473815921, guid: b1c69643131e51647a5ef2233b6dbdae, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -3729,10 +3729,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d31b803419b6e442a1fec00c2131506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxX: 10
-  maxY: 5
+  maxX: 6
+  maxY: 3
   roomsNumber: 10
-  maxChests: 3
+  maxChests: 2
   maxFights: 3
   mapParent: {fileID: 1767676374}
 --- !u!1 &1929059587
